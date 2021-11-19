@@ -3,6 +3,7 @@ package project.citiesapi.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import project.citiesapi.entity.Country;
@@ -20,13 +21,13 @@ public class CountryService {
         return countryRepository.findAll(page);
     }
 
-    public ResponseEntity<Country> getCountryById(Long id) {
+    public ResponseEntity<String> getCountryById(Long id) {
         Optional<Country> optionalCountry = countryRepository.findById(id);
 
         if (optionalCountry.isPresent()) {
-            return ResponseEntity.ok().body(optionalCountry.get());
+            return ResponseEntity.ok().body(optionalCountry.get().toString());
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id inválido!");
         }
     }
 }

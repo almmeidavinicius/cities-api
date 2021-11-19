@@ -24,7 +24,7 @@ public class StateResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<State> getStateById(@PathVariable Long id) {
+    public ResponseEntity<String> getStateById(@PathVariable Long id) {
         return stateService.getStateById(id);
     }
 }

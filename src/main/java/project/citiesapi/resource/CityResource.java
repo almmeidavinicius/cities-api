@@ -24,7 +24,7 @@ public class CityResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<City> getCityById(@PathVariable Long id) {
+    public ResponseEntity<String> getCityById(@PathVariable Long id) {
         return cityService.getCityById(id);
     }
 }

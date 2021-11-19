@@ -3,6 +3,7 @@ package project.citiesapi.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import project.citiesapi.entity.State;
@@ -20,13 +21,13 @@ public class StateService {
         return stateRepository.findAll(page);
     }
 
-    public ResponseEntity<State> getStateById(Long id) {
+    public ResponseEntity<String> getStateById(Long id) {
         Optional<State> optionalState = stateRepository.findById(id);
 
         if (optionalState.isPresent()) {
-            return ResponseEntity.ok().body(optionalState.get());
+            return ResponseEntity.ok().body(optionalState.get().toString());
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id inválido!");
         }
     }
 }

@@ -24,7 +24,7 @@ public class CountryResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Country> getCountryById(@PathVariable Long id) {
+    public ResponseEntity<String> getCountryById(@PathVariable Long id) {
         return countryService.getCountryById(id);
     }
 }

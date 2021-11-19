@@ -3,6 +3,7 @@ package project.citiesapi.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import project.citiesapi.entity.City;
@@ -20,13 +21,13 @@ public class CityService {
         return cityRepository.findAll(page);
     }
 
-    public ResponseEntity<City> getCityById(Long id) {
+    public ResponseEntity<String> getCityById(Long id) {
         Optional<City> optionalCity = cityRepository.findById(id);
 
         if (optionalCity.isPresent()) {
-            return ResponseEntity.ok().body(optionalCity.get());
+            return ResponseEntity.ok().body(optionalCity.get().toString());
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id inválido!");
         }
     }
 
